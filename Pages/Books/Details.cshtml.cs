@@ -28,7 +28,9 @@ namespace lab2_proiect_proba_refacut.Pages.Books
                 return NotFound();
             }
 
-            var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
+            var book = await _context.Book
+                .Include(i =>i.Publisher)
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (book == null)
             {
                 return NotFound();
